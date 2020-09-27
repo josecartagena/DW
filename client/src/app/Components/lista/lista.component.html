@@ -1,0 +1,37 @@
+<!-- *******************Menu******************* -->
+
+<div class="col-md-4" *ngFor="let menus of menu1">
+    <div class="card text-center" *ngIf="show">
+        <div class="card-header bg-dark text-white d-flex justify-content-between align-items-center">
+            {{menus.NOMBRE_MENU}}
+        </div>
+        <img class="card-img-top" [src]="menus.IMAGEN" style="max-width:100%;width:auto;height:auto;">
+        <div class="card-body">
+            <p>{{menus.DESCRIPCION}}</p>
+            <button class="btn btn-info btn-block" on-click="getSubMenu(menus.ID_MENU)" (click)=" show=!show">
+        Ver
+      </button>
+        </div>
+    </div>
+</div>
+<!-- *******************SubMenu*******************  -->
+<div class="col-md-4" *ngFor="let sub of menu2">
+    <div class="card text-center" *ngIf="!show">
+        <img class="card-img-top" [src]="sub.IMAGEN" alt="Card image cap">
+        <div class="card-header bg-dark text-white d-flex justify-content-between align-items-center">
+            {{sub.NOMBRE_PRODUCTO}}
+        </div>
+        <div class="card-body">
+            <p>{{sub.DESCRIPCION}}</p>
+            <button class="btn btn-info btn-block" (click)=" show=!show">
+            Menu
+          </button>
+            <button class="btn btn-info btn-block" (click)="getProducto(sub.ID_PRODUCTO)" routerLink="/menu/pedido" routerLinkActive="active">
+            Ordenar
+          </button>
+        </div>
+    </div>
+</div>
+
+
+<!-- ******************Jose ************************* -->

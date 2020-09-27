@@ -1,0 +1,63 @@
+<div class="row">
+    <div class="col">
+        <h5>Producto</h5>
+        <div *ngIf="mostrar" class="card text-white bg-primary mb-3" style="max-width: none;">
+            <img class="card-img-top" [src]="imagen" style="max-width:100%;width:auto;height:auto;">
+            <div class="card-body">
+                <h5 class="card-title">{{nombreProducto}}</h5>
+                <p class="card-text">{{descripcion}} </p>
+                Precio: Q.{{precio}}
+                <li *ngFor="let ingrediente of responseIngredientes;">
+                    {{ingrediente.NOMBRE_INGREDIENTE}} Costo: {{ingrediente.COSTO }}
+                </li>
+                <p></p>
+                <strong> <p> Total: Q.{{costo}} <button (click)="SavePeido(1)" class="btn btn-light completado">Finalizar Orden</button></p> </strong>
+            </div>
+        </div>
+    </div>
+    <!-- *****************ingrediente*************** -->
+    <div class="col">
+        <h5>
+            <p>Ingredientes</p>
+        </h5>
+        <ul class="list-group">
+            <li *ngFor="let ingrediente of responseIngredientes;let i = index" class="list-group-item">
+                {{ingrediente.NOMBRE_INGREDIENTE}}
+                <!--- Precio: {{ingrediente.COSTO}}-->
+                <!-- <span class="badge badge-primary badge-pill">14</span> -->
+            </li>
+            <li class="list-group-item" *ngIf="ext">
+                <!-- ******aqui**** -->
+                {{nombreExtra}}
+            </li>
+        </ul>
+        <!-- *****************ingrediente*************** -->
+        <!-- <ul class="list-group" *ngIf="!ext"> -->
+        <ul class="list-group">
+            <h5>
+                <p>Agregar ingrediente Extra</p>
+            </h5>
+            <li *ngFor="let ingrediente of responseIngredientesRest; let i = index" class="list-group-item">
+                <div class="input-group-append">
+                    <!-- <button class="btn btn-primary" type="button " (click)="getProducto(ingrediente)" (click)="ext=!ext"> + </button> {{ ingrediente.NOMBRE_INGREDIENTE }} - Precio: {{ingrediente.COSTO}} -->
+                    <button class="btn btn-primary" type="button " (click)="getProducto(ingrediente)" (click)="ext=!ext"> + </button> {{ ingrediente.NOMBRE_INGREDIENTE }} - Precio: {{ingrediente.COSTO}}
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<ng-template #content let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Hi there!</h4>
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+        <p>Hello, World!</p>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" (click)="c('Save click')">Save</button>
+    </div>
+</ng-template>

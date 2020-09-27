@@ -1,0 +1,22 @@
+<p>HEY</p>
+
+
+
+<div class="col-md-4" *ngFor="let menus of menu2">
+    <div class="card text-center">
+        <div class="card-header bg-dark text-white d-flex justify-content-between align-items-center">
+            {{menus.NOMBRE_PRODUCTO}}
+            <button class="btn btn-danger" on-click="getSubMenu(menus.ID_MENU)">
+          <i >aaa</i>
+        </button>
+        </div>
+        <img class="card-img-top" [src]="menus.IMAGEN" height="270">
+        <div class="card-body">
+            <p>{{menus.DESCRIPCION}}</p>
+            <!-- <p>Created At {{game.created_at | date: 'yyyy-MM-dd'}}</p> -->
+            <a [routerLink]="['/getSubMenu', menus.id]" class="btn btn-info btn-block">
+          Ver
+        </a>
+        </div>
+    </div>
+</div>

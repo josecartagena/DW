@@ -3,6 +3,33 @@ var conexion = require('../config/dbConnection');
 
 const router = Router();
 
+router.get('/getIngredientesRest', (req, res) => {
+    var parametros = req.query;
+    conexion.getConnection((err, con) => {
+        con.query('CALL PRC_INGREDIENTES_REST(?)', parametros.id, (err, rows, fields) => {
+            if (!err) {
+                const data = {
+                    "Estatus": true,
+                    "Descripcion": "Lista de ingredientes para agregar a un producto",
+                    "Rows": rows
+                }
+                res.header("Access-Control-Allow-Origin", "*");
+                res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+                res.json(data);
+            } else {
+                const data = {
+                    "Estatus": false,
+                    "Descripcion": "Error: " + err,
+                }
+
+                res.json(data);
+            }
+            con.release();
+        });
+    });
+    //conexion.release();
+});
+
 router.get('/getMenu',(req, res)=>{
     conexion.getConnection( (err, con)=>{
         con.query('CALL PRC_MENU()', (err, rows)=>{
@@ -59,7 +86,7 @@ router.get('/getSubMenu',(req, res)=>{
                 const data = {
                     "Estatus" : true,
                     "Descripcion": "Lista de productos de un menu especificado",
-                    "Rows": err
+                    "Rows": rows
                 }
                 res.json(data);
             }else{

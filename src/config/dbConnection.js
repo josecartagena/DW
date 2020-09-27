@@ -5,9 +5,9 @@ var mysqlConexion = mysql.createPool({
     connectionLimit: 150,
     host: 'localhost',
     user: 'root',
-    password: 'root',
-    database: 'DW',
-    port: 8887,
+    password: '1234',
+    database: 'dw',
+    port: 3306,
     timeout: 10
 });
 
